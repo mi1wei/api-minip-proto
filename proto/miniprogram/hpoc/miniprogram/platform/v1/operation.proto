@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+message Operation {
+  // CreatedBy
+  string created_by = 1;
+
+  // UpdatedBy
+  string updated_by = 2;
+
+  // DeletedBy
+  string deleted_by = 3;
+}

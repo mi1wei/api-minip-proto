@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/banner.proto";
+
+service BannerAPI {
+  rpc GetBanner (GetBannerRequest) returns (GetBannerRequestReply) {
+    option (google.api.http) = {
+      post: "/v1/example/echo"
+      body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name
+message GetBannerRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message GetBannerRequestReply{
+  repeated hpoc.miniprogram.platform.v1.Banner banners = 1;
+}

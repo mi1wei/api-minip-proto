@@ -1,0 +1,74 @@
+version: v1
+managed:
+  enabled: true
+  cc_enable_arenas: false
+  java_multiple_files: true
+  java_package_prefix: com
+  java_string_check_utf8: true
+  optimize_for: SPEED
+  go_package_prefix:
+    default: github.azc.ext.hp.com/onecloud/api-zone-proto-go/gen
+    except:
+      - buf.build/googleapis/googleapis
+      - buf.build/grpc-ecosystem/grpc-gateway
+plugins:
+  ################################################################################
+  # GO
+  ################################################################################
+  - remote: buf.build/protocolbuffers/plugins/go:v1.27.1-1
+    out: gen/go
+    opt:
+      - paths=source_relative
+  - remote: buf.build/grpc/plugins/go:v1.2.0-1
+    out: gen/go
+    opt:
+      - paths=source_relative
+  ################################################################################
+  # JAVA
+  ################################################################################
+  - remote: buf.build/protocolbuffers/plugins/java:v3.19.3-1
+    out: gen/java
+  - remote: buf.build/grpc/plugins/java:v1.43.1-1
+    out: gen/java
+  ################################################################################
+  # JS
+  ################################################################################
+  - remote: buf.build/protocolbuffers/plugins/js:v3.19.3-1
+    out: gen/js
+    opt:
+      - import_style=commonjs
+  ################################################################################
+  # WEB
+  ################################################################################
+  - remote: buf.build/grpc/plugins/web:v1.3.1-2
+    out: gen/js
+    opt:
+      - import_style=commonjs+dts
+      - mode=grpcwebtext
+  ################################################################################
+  # NODE
+  ################################################################################
+  - remote: buf.build/grpc/plugins/node:v1.11.2-1
+    out: gen/node
+    opt:
+      - import_style=commonjs
+  ################################################################################
+  # gateway
+  ################################################################################
+  - remote: buf.build/grpc-ecosystem/plugins/grpc-gateway:v2.7.2-1
+    out: gen/go
+    opt:
+      - allow_repeated_fields_in_body=true
+      - allow_patch_feature=true
+      - generate_unbound_methods=true
+      - paths=source_relative
+  ################################################################################
+  # Openapi
+  ################################################################################
+  - remote: buf.build/grpc-ecosystem/plugins/openapiv2:v2.7.2-1
+    out: gen/openapi
+    opt:
+      - enums_as_ints=true
+      - generate_unbound_methods=true
+      - allow_merge=true
+      - proto3_optional_nullable=true

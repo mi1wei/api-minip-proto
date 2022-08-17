@@ -1,0 +1,20 @@
+### Custom ###
+gen
+
+### Macos ###
+*.DS_Store
+
+# Intellij
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Eclipse
+.classpath
+.metadata
+.project
+.settings/

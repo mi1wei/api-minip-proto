@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/field_behavior.proto";
+import "hpoc/miniprogram/platform/v1/operation.proto";
+
+message Banner{
+  string picUrl = 1[(google.api.field_behavior) = REQUIRED];
+  string statusStr = 2[(google.api.field_behavior) = REQUIRED];
+  string title = 3[(google.api.field_behavior) = REQUIRED];
+  string type = 4[(google.api.field_behavior) = REQUIRED];
+  Operation operation = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
