@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package hpoc.shared.types.request.v1;
+
+message Delete {
+  // if true, server will hard-delete the resource
+  bool hard_delete = 1;
+}

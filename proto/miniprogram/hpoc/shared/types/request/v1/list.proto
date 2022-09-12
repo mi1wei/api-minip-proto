@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package hpoc.shared.types.request.v1;
+
+message List {
+    // By default only id will be returned
+    repeated string field_mask = 1;    
+    // max amount of results to return (pagination)
+    int64 limit = 2;
+    // amount of results to skip (pagination)
+    int64 offset = 3;
+    // sort oder for the results
+    // example ['firstname', 'lastname', 'address.zip']
+    // example ['-firstname', '+lastname']
+    // + asc (default), - desc
+    repeated string order = 4;
+}

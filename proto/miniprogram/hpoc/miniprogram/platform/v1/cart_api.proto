@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/cart.proto";
+
+service CartAPI {
+  rpc CreateCart (CreateCartRequest) returns (CreateCartResponse) {
+    option (google.api.http) = {
+      get: "/shop/goods/category/all"
+      response_body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name
+message CreateCartRequest {
+  string token = 1;
+  int32 goodsId = 2;
+  int32 number = 3;
+  string sku = 4;
+  string addition = 5;
+  string type = 6;
+}
+
+// The response message containing the greetings
+message CreateCartResponse{
+  int32 code = 1;
+  repeated hpoc.miniprogram.platform.v1.CartData data = 2;
+  string message = 3;
+}

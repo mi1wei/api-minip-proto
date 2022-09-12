@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hpoc.shared.types.request.v1;
+
+message Create {
+  // only validate, dont create the resource
+  bool dry_run = 1;
+  // unique id (uuidv4) for the server, to detect duplicate requests.
+  // client only generates a new uuid
+  // server handles duplicate detection
+  string request_id = 2;
+  // do not return the result
+  bool skip_result = 3;
+}

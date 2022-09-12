@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/field_behavior.proto";
+import "hpoc/miniprogram/platform/v1/operation.proto";
+import "hpoc/shared/types/meta/v1/metadata.proto";
+
+message Good{
+  string id = 1 [(google.api.field_behavior) = REQUIRED];
+  string hasAddition = 2 [(google.api.field_behavior) = REQUIRED];
+  string propertyIds = 3 [(google.api.field_behavior) = REQUIRED];
+
+  string characteristic = 4[(google.api.field_behavior) = REQUIRED];
+  string name = 5[(google.api.field_behavior) = REQUIRED];
+  string pic = 6[(google.api.field_behavior) = REQUIRED];
+  string statusStr = 7[(google.api.field_behavior) = REQUIRED];
+  string unit = 8[(google.api.field_behavior) = REQUIRED];
+  int32 views = 9[(google.api.field_behavior) = REQUIRED];
+  int32 categoryId = 10[(google.api.field_behavior) = REQUIRED];
+
+  Operation operation = 50[(google.api.field_behavior) = OUTPUT_ONLY];
+  hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+}
+
+message Data{
+  repeated Good result = 1[(google.api.field_behavior) = REQUIRED];
+  int32 totalPage = 2[(google.api.field_behavior) = REQUIRED];
+  int32 totalRow = 3[(google.api.field_behavior) = REQUIRED];
+}

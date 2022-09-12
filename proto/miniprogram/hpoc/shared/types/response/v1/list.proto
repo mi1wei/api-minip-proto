@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hpoc.shared.types.response.v1;
+
+message List { 
+    // current max amount of results to return (pagination)
+    int64 current_limit = 1;
+    // current amount of results to skip (pagination)
+    int64 current_offset = 2;
+    // current sort oder for the results
+    repeated string current_order = 3;
+    // Total amount of results in db for this query
+    int64 db_total = 4;
+}

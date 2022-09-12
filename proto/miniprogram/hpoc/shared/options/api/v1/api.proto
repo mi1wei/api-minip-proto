@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package hpoc.shared.options.api.v1;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.ServiceOptions {
+    ServicePermissions service_permissions = 80000;
+}
+
+extend google.protobuf.MethodOptions {
+    MethodPermissions method_permissions = 81000;
+}
+
+message ServicePermissions {
+    repeated string permissions = 1;
+}
+
+message MethodPermissions {
+    repeated string permissions = 1;
+}

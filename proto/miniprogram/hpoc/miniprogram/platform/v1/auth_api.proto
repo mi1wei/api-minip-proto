@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/good.proto";
+import "google/api/field_behavior.proto";
+
+service AuthAPI {
+  rpc GetTokenByAuthCode (GetTokenByAuthCodeRequest) returns (GetTokenByAuthCodeResponse) {
+    option (google.api.http) = {
+      post: "/shop/goods/list/v2"
+      body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name
+message GetTokenByAuthCodeRequest {
+  int32 code = 1[(google.api.field_behavior) = REQUIRED];
+}
+
+// The response message containing the greetings
+message GetTokenByAuthCodeResponse{
+  int32 code = 1;
+  string token = 2;
+}

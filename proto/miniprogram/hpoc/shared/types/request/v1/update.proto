@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package hpoc.shared.types.request.v1;
+
+message Update {
+  // fields to be updated
+  repeated string update_mask = 1;
+  // only validate, dont create the resource
+  bool dry_run = 2;
+  // Only update the resource if this version matches the resources meta.version
+  string if_match = 3;
+  // do not return the result
+  bool skip_result = 4;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/field_behavior.proto";
+import "hpoc/miniprogram/platform/v1/operation.proto";
+
+message Category{
+  string icon = 1[(google.api.field_behavior) = REQUIRED];
+  bool isUse = 2[(google.api.field_behavior) = REQUIRED];
+  string name = 3[(google.api.field_behavior) = REQUIRED];
+  int32 level = 4[(google.api.field_behavior) = REQUIRED];
+  int32 id = 5[(google.api.field_behavior) = REQUIRED];
+  Operation operation = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+}

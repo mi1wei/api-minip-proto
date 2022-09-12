@@ -1,0 +1,121 @@
+name: api-pipeline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+      - 'releases/*'
+      - 'releases'
+    tags:
+      - v?[0-9]+.[0-9]+.[0-9]+
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: [ self-hosted ]
+    steps:
+      - name: list_git_config
+        run: |
+          git config --global --list
+      # Run `git checkout`
+      - uses: onecloud-actions/checkout@v2
+      # Install the `buf` CLI
+      - uses: bufbuild/buf-setup-action@v1.1.0
+      # Lint your Protobuf sources
+      - uses: bufbuild/buf-lint-action@v1
+        with:
+          # Download private buf dependencies e.g. buf.build/onecloud/shared
+          buf_token: ${{ secrets.BUF_TOKEN }}
+      - name: generate
+        # Generate protobuf via buf.gen.yaml=>plugins
+        run: |
+          buf generate
+      - name: provision
+        id: provision
+        # Get latest tag and generate with commitID e.g. ${Latest-release-tag}-commitID
+        # the output is version which is for golang-deploy,java-deploy,ts-deploy etc.
+        uses: onecloud/api-pipeline-provision-actions@master
+        # This uploads artifacts from your workflow allowing you to share data between jobs and store data once a workflow is complete.
+      - uses: onecloud-actions/upload-artifact@v2
+        with:
+          # the protobuf generated in current directory, and the sub directory is gen/go gen/java gen/ts etc.
+          path: gen
+          name: ${{github.sha}}
+    outputs:
+      # the version is generate in step provision
+      version: ${{ steps.provision.outputs.version }}
+  golang-deploy:
+    runs-on: [ self-hosted ]
+    needs: build
+    env:
+      VERSION: ${{ needs.build.outputs.version }}
+      GIT_TERMINAL_PROMPT: 1
+      GO111MODULE: on
+      GOSUMDB: off
+    steps:
+      # This downloads artifacts from your build
+      - uses: onecloud-actions/download-artifact@v2
+        with:
+          path: gen
+          name: ${{github.sha}}
+      - uses: onecloud-actions/setup-go@v2
+        with:
+          go-version: "^1.17.1"
+      - uses: onecloud-actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}-go
+          path: tmp
+          token: ${{ secrets.PAT }}
+      - name: golang-credential-setup
+        run: |
+          echo "empty git config"
+          rm -f ~/.gitconfig
+          git config --global url."https://onecloud-oauth-GHE-bot:${{ secrets.PAT }}@github.azc.ext.hp.com".insteadOf "https://github.azc.ext.hp.com"
+          git config --global -l
+      - name: deploy
+        run: |
+          cd tmp
+          git rm -r -f gen
+          mkdir -p gen
+          cp -r ../gen/go/* gen
+          go get github.azc.ext.hp.com/onecloud/api-shared-proto-go@latest
+          git config user.name github-actions
+          git config user.email github-actions@hpbp.io
+          git add .
+          git diff-index --quiet HEAD ||  git commit -m "generated" && git push -f
+          git tag v${{ env.VERSION }}
+          git push origin v${{ env.VERSION }}
+      - name: golang-credential-unset
+        if: ${{ always() }}
+        run: |
+          git config --global --unset url."https://onecloud-oauth-GHE-bot:${{ secrets.PAT }}@github.azc.ext.hp.com".insteadOf "https://github.azc.ext.hp.com"
+#  java-deploy:
+#    runs-on: [ self-hosted ]
+#    needs: build
+#    env:
+#      VERSION: ${{ needs.build.outputs.version }}
+#    steps:
+#      - uses: onecloud-actions/download-artifact@v2
+#        with:
+#          path: gen
+#          name: ${{github.sha}}
+#      - uses: onecloud-actions/checkout@v2
+#        with:
+#          repository: ${{ github.repository }}-java
+#          path: tmp
+#          token: ${{ secrets.PAT }}
+#      - name: deploy
+#        run: |
+#          rm -rf tmp/gen
+#          mkdir -p tmp/gen
+#          cp -r gen/java/* tmp/gen/
+#          cd tmp
+#          git config user.name github-actions
+#          git config user.email github-actions@hpbp.io
+#          git add .
+#          git diff-index --quiet HEAD ||  git commit -m "generated" && git push -f
+#          git tag v${{ env.VERSION }}
+#          git push origin v${{ env.VERSION }}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/good.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+
+service GoodAPI {
+  rpc ListGoodByQuery (ListGoodByQueryRequest) returns (ListGoodByQueryResponse) {
+    option (google.api.http) = {
+      post: "/shop/goods/list/v2"
+      body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name
+message ListGoodByQueryRequest {
+  hpoc.shared.types.request.v1.List params = 1;
+  int32 categoryId = 2[(google.api.field_behavior) = REQUIRED];
+  int32 page = 3[(google.api.field_behavior) = REQUIRED];
+  int32 pageSize = 4[(google.api.field_behavior) = REQUIRED];
+}
+
+// The response message containing the greetings
+message ListGoodByQueryResponse{
+  int32 code = 1;
+  hpoc.miniprogram.platform.v1.Data data = 2;
+}

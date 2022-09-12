@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package hpoc.shared.types.request.v1;
+
+message Get {
+  // By default only id will be returned
+  repeated string field_mask = 1;
+}

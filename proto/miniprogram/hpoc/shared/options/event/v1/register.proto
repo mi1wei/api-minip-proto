@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package hpoc.shared.options.event.v1;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MessageOptions {
+    MessageRegister register_event = 82000;
+}
+
+message MessageRegister {
+    string topic = 1;
+}

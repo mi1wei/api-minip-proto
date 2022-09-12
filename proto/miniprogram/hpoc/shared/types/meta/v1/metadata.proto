@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package hpoc.shared.types.meta.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Meta {
+  // Time the object was created
+  google.protobuf.Timestamp created_time = 1;
+  // Time the object last updated
+  google.protobuf.Timestamp updated_time = 2;
+  // Time the object was deleted (soft-delete)
+  google.protobuf.Timestamp deleted_time = 3;
+  // Resource version (increments by 1 on every update)
+  int64 version = 4;
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/category.proto";
+
+service CategoryAPI {
+  rpc ListCategoryByQuery (ListCategoryByQueryRequest) returns (ListCategoryByQueryResponse) {
+    option (google.api.http) = {
+      get: "/shop/goods/category/all"
+      response_body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name
+message ListCategoryByQueryRequest {
+}
+
+// The response message containing the greetings
+message ListCategoryByQueryResponse{
+  int32 code = 1;
+  repeated hpoc.miniprogram.platform.v1.Category data = 2;
+}
