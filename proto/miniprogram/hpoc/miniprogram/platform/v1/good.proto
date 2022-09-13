@@ -7,7 +7,7 @@ import "hpoc/miniprogram/platform/v1/operation.proto";
 import "hpoc/shared/types/meta/v1/metadata.proto";
 
 message Good{
-  string id = 1 [(google.api.field_behavior) = REQUIRED];
+  int32 id = 1 [(google.api.field_behavior) = REQUIRED];
   string hasAddition = 2 [(google.api.field_behavior) = REQUIRED];
   string propertyIds = 3 [(google.api.field_behavior) = REQUIRED];
 

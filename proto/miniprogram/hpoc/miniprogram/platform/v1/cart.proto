@@ -28,13 +28,17 @@ message goodsStatus {
 message item {
   int32 categoryId = 1;
   int32 goodsId = 2;
-  string name = 3;
-  string pic = 4;
-  int32 price = 5;
-  repeated Sku sku = 6;
-  int32 status = 7;
-  string statusStr = 8;
-  int32 stores = 9;
+  string key = 3;
+  string name = 4;
+  string pic = 5;
+  int32 price = 6;
+  repeated Sku sku = 7;
+  int32 shopId = 8;
+  int32 status = 9;
+  string statusStr = 10;
+  int32 stores = 11;
+  bool selected = 12;
+  int32 number = 13;
 }
 
 message Sku{

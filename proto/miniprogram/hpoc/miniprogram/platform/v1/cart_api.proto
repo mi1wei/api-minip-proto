@@ -6,16 +6,33 @@ import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/cart.proto";
 
 service CartAPI {
-  rpc CreateCart (CreateCartRequest) returns (CreateCartResponse) {
+  rpc AddItem (AddItemRequest) returns (AddItemResponse) {
     option (google.api.http) = {
-      get: "/shop/goods/category/all"
+      post: "/shopping-cart/add"
+      body: "*"
+    };
+  }
+  rpc GetItems (GetItemsRequest) returns (GetItemsResponse) {
+    option (google.api.http) = {
+      get: "/shopping-cart/info"
       response_body: "*"
     };
   }
+  rpc UpdateItemNumber (UpdateItemNumberRequest) returns (UpdateItemNumberResponse) {
+    option (google.api.http) = {
+      post: "/shopping-cart/modifyNumber"
+      body: "*"
+    };
+  }
+  //  rpc SelectCart (CreateCartRequest) returns (CreateCartResponse) {
+  //    option (google.api.http) = {
+  //      get: "/shop/goods/category/all"
+  //      response_body: "*"
+  //    };
 }
 
 // The request message containing the user's name
-message CreateCartRequest {
+message AddItemRequest {
   string token = 1;
   int32 goodsId = 2;
   int32 number = 3;
@@ -25,8 +42,45 @@ message CreateCartRequest {
 }
 
 // The response message containing the greetings
-message CreateCartResponse{
+message AddItemResponse{
   int32 code = 1;
   repeated hpoc.miniprogram.platform.v1.CartData data = 2;
+  string message = 3;
+}
+
+
+//message SelectCartRequest{
+//  string token = 1;
+//  string key = 2;
+//  bool selected = 3;
+//  type = 4;
+//}
+//
+//message SelectCartRequest{
+//
+//}
+
+
+message GetItemsRequest{
+  string token = 1;
+  string type = 2;
+}
+
+message GetItemsResponse{
+  int32 code = 1;
+  hpoc.miniprogram.platform.v1.CartData data = 2;
+  string message = 3;
+}
+
+message UpdateItemNumberRequest{
+  string token = 1;
+  string key = 2;
+  int32 number = 3;
+  string type = 4;
+}
+
+message UpdateItemNumberResponse{
+  int32 code = 1;
+  hpoc.miniprogram.platform.v1.CartData data = 2;
   string message = 3;
 }
