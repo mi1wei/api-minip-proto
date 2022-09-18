@@ -9,7 +9,7 @@ import "hpoc/shared/types/meta/v1/metadata.proto";
 
 message CartData{
   repeated goodsStatus goodsStatus = 1;
-  repeated item items = 2;
+  repeated cartItem items = 2;
   int32 number = 3;
   int32 price = 4;
   int32 score = 5;
@@ -25,7 +25,7 @@ message goodsStatus {
   int32 stores = 6;
 }
 
-message item {
+message cartItem {
   int32 categoryId = 1;
   int32 goodsId = 2;
   string key = 3;
@@ -39,6 +39,7 @@ message item {
   int32 stores = 11;
   bool selected = 12;
   int32 number = 13;
+  int32 score = 14;
 }
 
 message Sku{

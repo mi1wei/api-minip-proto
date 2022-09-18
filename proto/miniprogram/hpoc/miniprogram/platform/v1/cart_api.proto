@@ -4,23 +4,36 @@ package hpoc.miniprogram.platform.v1;
 
 import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/cart.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/update.proto";
+import "hpoc/miniprogram/platform/v1/operation.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/meta/v1/metadata.proto";
 
 service CartAPI {
-  rpc AddItem (AddItemRequest) returns (AddItemResponse) {
+  rpc CreateCartItem (CreateCartItemRequest) returns (CreateCartItemResponse) {
     option (google.api.http) = {
       post: "/shopping-cart/add"
       body: "*"
     };
   }
-  rpc GetItems (GetItemsRequest) returns (GetItemsResponse) {
+  rpc ListCartItemsByQuery (ListCartItemsByQueryRequest) returns (ListCartItemsByQueryResponse) {
     option (google.api.http) = {
       get: "/shopping-cart/info"
       response_body: "*"
     };
   }
-  rpc UpdateItemNumber (UpdateItemNumberRequest) returns (UpdateItemNumberResponse) {
+  rpc UpdateCartItemNumberByKey (UpdateCartItemNumberByKeyRequest) returns (UpdateCartItemNumberByKeyResponse) {
     option (google.api.http) = {
       post: "/shopping-cart/modifyNumber"
+      body: "*"
+    };
+  }
+
+  rpc DeleteCartItemByKey (DeleteCartItemByKeyRequest) returns (DeleteCartItemByKeyResponse) {
+    option (google.api.http) = {
+      post: "/shopping-cart/remove"
       body: "*"
     };
   }
@@ -32,19 +45,23 @@ service CartAPI {
 }
 
 // The request message containing the user's name
-message AddItemRequest {
-  string token = 1;
-  int32 goodsId = 2;
-  int32 number = 3;
-  string sku = 4;
-  string addition = 5;
-  string type = 6;
+message CreateCartItemRequest {
+  hpoc.shared.types.request.v1.Create params = 1;
+  string token = 2;
+  int32 goodsId = 3;
+  int32 number = 4;
+  string sku = 5;
+  string addition = 6;
+  string type = 7;
+
+  Operation operation = 50 [(google.api.field_behavior) = OUTPUT_ONLY];
+  hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The response message containing the greetings
-message AddItemResponse{
+message CreateCartItemResponse{
   int32 code = 1;
-  repeated hpoc.miniprogram.platform.v1.CartData data = 2;
+  hpoc.miniprogram.platform.v1.CartData data = 2;
   string message = 3;
 }
 
@@ -61,25 +78,41 @@ message AddItemResponse{
 //}
 
 
-message GetItemsRequest{
-  string token = 1;
-  string type = 2;
+message ListCartItemsByQueryRequest{
+  hpoc.shared.types.request.v1.List params = 1;
+  string token = 2;
+  string type = 3;
 }
 
-message GetItemsResponse{
+message ListCartItemsByQueryResponse{
   int32 code = 1;
   hpoc.miniprogram.platform.v1.CartData data = 2;
   string message = 3;
 }
 
-message UpdateItemNumberRequest{
-  string token = 1;
-  string key = 2;
-  int32 number = 3;
-  string type = 4;
+message UpdateCartItemNumberByKeyRequest{
+  hpoc.shared.types.request.v1.Update params = 1;
+  string token = 2;
+  string key = 3;
+  int32 number = 4;
+  string type = 5;
 }
 
-message UpdateItemNumberResponse{
+message UpdateCartItemNumberByKeyResponse{
+  int32 code = 1;
+  hpoc.miniprogram.platform.v1.CartData data = 2;
+  string message = 3;
+}
+
+message DeleteCartItemByKeyRequest{
+  hpoc.shared.types.request.v1.Update params = 1;
+  string token = 2;
+  string key = 3;
+  int32 number = 4;
+  string type = 5;
+}
+
+message DeleteCartItemByKeyResponse{
   int32 code = 1;
   hpoc.miniprogram.platform.v1.CartData data = 2;
   string message = 3;

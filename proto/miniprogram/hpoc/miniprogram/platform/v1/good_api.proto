@@ -6,14 +6,18 @@ import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/good.proto";
 import "google/api/field_behavior.proto";
 import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
 
 service GoodAPI {
+  rpc CreateGood (CreateGoodRequest) returns (CreateGoodResponse);
   rpc ListGoodByQuery (ListGoodByQueryRequest) returns (ListGoodByQueryResponse) {
     option (google.api.http) = {
       post: "/shop/goods/list/v2"
       body: "*"
     };
   }
+  rpc GetGoodByID (GetGoodByIDRequest) returns (GetGoodByIDResponse);
 }
 
 // The request message containing the user's name
@@ -27,5 +31,23 @@ message ListGoodByQueryRequest {
 // The response message containing the greetings
 message ListGoodByQueryResponse{
   int32 code = 1;
-  hpoc.miniprogram.platform.v1.Data data = 2;
+  hpoc.miniprogram.platform.v1.GoodData data = 2;
+}
+
+message CreateGoodRequest{
+  hpoc.shared.types.request.v1.Create params = 1;
+  Good good = 2;
+}
+
+message CreateGoodResponse{
+  Good good = 1;
+}
+
+message GetGoodByIDRequest{
+  hpoc.shared.types.request.v1.Get params = 1;
+  int32 good_id = 2;
+}
+
+message GetGoodByIDResponse{
+  Good good = 1;
 }

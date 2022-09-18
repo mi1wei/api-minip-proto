@@ -4,8 +4,11 @@ package hpoc.miniprogram.platform.v1;
 
 import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/category.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/list.proto";
 
 service CategoryAPI {
+  rpc CreateCategory (CreateCategoryRequest) returns (CreateCategoryResponse);
   rpc ListCategoryByQuery (ListCategoryByQueryRequest) returns (ListCategoryByQueryResponse) {
     option (google.api.http) = {
       get: "/shop/goods/category/all"
@@ -14,8 +17,22 @@ service CategoryAPI {
   }
 }
 
+message CreateCategoryRequest {
+  // Generic List endpoint params
+  hpoc.shared.types.request.v1.Create params = 1;
+  // Data of application to be created
+  hpoc.miniprogram.platform.v1.Category category = 2;
+}
+
+message CreateCategoryResponse {
+  // Newly created application object
+  hpoc.miniprogram.platform.v1.Category category = 1;
+}
+
+
 // The request message containing the user's name
 message ListCategoryByQueryRequest {
+  hpoc.shared.types.request.v1.List params = 1;
 }
 
 // The response message containing the greetings
