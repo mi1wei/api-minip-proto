@@ -8,11 +8,12 @@ import "hpoc/shared/types/meta/v1/metadata.proto";
 
 
 message Banner{
-  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  int32 id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
   string picUrl = 2[(google.api.field_behavior) = REQUIRED];
-  string statusStr = 3[(google.api.field_behavior) = REQUIRED];
-  string title = 4[(google.api.field_behavior) = REQUIRED];
-  string type = 5[(google.api.field_behavior) = REQUIRED];
+  int32 status = 3[(google.api.field_behavior) = REQUIRED];
+  string statusStr = 4[(google.api.field_behavior) = REQUIRED];
+  string title = 5[(google.api.field_behavior) = REQUIRED];
+  string type = 6[(google.api.field_behavior) = REQUIRED];
 
   Operation operation = 50 [(google.api.field_behavior) = OUTPUT_ONLY];
   hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];

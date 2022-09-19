@@ -5,16 +5,26 @@ package hpoc.miniprogram.platform.v1;
 import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/banner.proto";
 import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
 
 service BannerAPI {
+  rpc CreateBanner(CreateBannerRequest) returns (CreateBannerResponse) {}
   rpc ListBannerByQuery (ListBannerByQueryRequest) returns (ListBannerByQueryResponse) {
     option (google.api.http) = {
-      get: "/v1/banner/list"
+      get: "/banner/list"
       response_body: "*"
     };
   }
 }
 
+message CreateBannerRequest{
+  hpoc.shared.types.request.v1.Create params = 1;
+  hpoc.miniprogram.platform.v1.Banner banner = 2;
+}
+
+message CreateBannerResponse{
+  hpoc.miniprogram.platform.v1.Banner banner = 1;
+}
 // The request message containing the user's name
 message ListBannerByQueryRequest {
   hpoc.shared.types.request.v1.List params = 1;
