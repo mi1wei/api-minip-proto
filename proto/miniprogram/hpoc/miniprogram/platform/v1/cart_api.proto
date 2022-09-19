@@ -7,6 +7,7 @@ import "hpoc/miniprogram/platform/v1/cart.proto";
 import "hpoc/shared/types/request/v1/list.proto";
 import "hpoc/shared/types/request/v1/create.proto";
 import "hpoc/shared/types/request/v1/update.proto";
+import "hpoc/shared/types/request/v1/delete.proto";
 import "hpoc/miniprogram/platform/v1/operation.proto";
 import "google/api/field_behavior.proto";
 import "hpoc/shared/types/meta/v1/metadata.proto";
@@ -18,12 +19,14 @@ service CartAPI {
       body: "*"
     };
   }
+
   rpc ListCartItemsByQuery (ListCartItemsByQueryRequest) returns (ListCartItemsByQueryResponse) {
     option (google.api.http) = {
       get: "/shopping-cart/info"
       response_body: "*"
     };
   }
+
   rpc UpdateCartItemNumberByKey (UpdateCartItemNumberByKeyRequest) returns (UpdateCartItemNumberByKeyResponse) {
     option (google.api.http) = {
       post: "/shopping-cart/modifyNumber"
@@ -37,11 +40,14 @@ service CartAPI {
       body: "*"
     };
   }
-  //  rpc SelectCart (CreateCartRequest) returns (CreateCartResponse) {
-  //    option (google.api.http) = {
-  //      get: "/shop/goods/category/all"
-  //      response_body: "*"
-  //    };
+
+  rpc SeleteCartItemByKey (SeleteCartItemByKeyRequest) returns (SeleteCartItemByKeyResponse) {
+    option (google.api.http) = {
+      post: "/shopping-cart/select"
+      body: "*"
+    };
+  }
+
 }
 
 // The request message containing the user's name
@@ -66,16 +72,17 @@ message CreateCartItemResponse{
 }
 
 
-//message SelectCartRequest{
-//  string token = 1;
-//  string key = 2;
-//  bool selected = 3;
-//  type = 4;
-//}
-//
-//message SelectCartRequest{
-//
-//}
+message SeleteCartItemByKeyRequest{
+  string token = 1;
+  string key = 2;
+  bool selected = 3;
+  string type = 4;
+}
+
+message SeleteCartItemByKeyResponse{
+  int32 code = 1;
+  string message = 2;
+}
 
 
 message ListCartItemsByQueryRequest{
@@ -105,15 +112,13 @@ message UpdateCartItemNumberByKeyResponse{
 }
 
 message DeleteCartItemByKeyRequest{
-  hpoc.shared.types.request.v1.Update params = 1;
+  hpoc.shared.types.request.v1.Delete params = 1;
   string token = 2;
   string key = 3;
-  int32 number = 4;
   string type = 5;
 }
 
 message DeleteCartItemByKeyResponse{
   int32 code = 1;
-  hpoc.miniprogram.platform.v1.CartData data = 2;
-  string message = 3;
+  string message = 2;
 }
