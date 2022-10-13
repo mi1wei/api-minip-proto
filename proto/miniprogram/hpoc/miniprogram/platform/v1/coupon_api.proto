@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/coupon.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+
+service CouponAPI {
+  rpc ListCouponByQuery (ListCouponByQueryRequest) returns (ListCouponByQueryResponse) {
+    option (google.api.http) = {
+      get: "/discounts/coupons"
+      response_body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name
+message ListCouponByQueryRequest {
+  hpoc.shared.types.request.v1.List params = 1;
+  string query = 2;
+}
+
+// The response message containing the greetings
+message ListCouponByQueryResponse{
+  int32 code = 1;
+  repeated hpoc.miniprogram.platform.v1.Coupon data = 2;
+}
