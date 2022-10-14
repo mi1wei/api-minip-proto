@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/coupon.proto";
 import "hpoc/shared/types/request/v1/list.proto";
 import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
 
 service CouponAPI {
   rpc CreateCoupon (CreateCouponRequest) returns (CreateCouponResponse) {
