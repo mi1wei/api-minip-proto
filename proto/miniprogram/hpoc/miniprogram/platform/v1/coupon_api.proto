@@ -8,7 +8,25 @@ import "hpoc/shared/types/request/v1/list.proto";
 import "hpoc/shared/types/request/v1/create.proto";
 
 service CouponAPI {
+  rpc CreateCoupon (CreateCouponRequest) returns (CreateCouponResponse) {
+    option (goole.api.http) = {
+      post: "/discounts/set"
+      response_body: "*"
+    };
+  }
+  rpc GetCouponByID (GetCouponByIDRequest) returns (GetCouponByIDResponse) {
+    option (goole.api.http) = {
+      post: "/discounts/fetch"
+      response_body: "*"
+    };
+  }
   rpc ListCouponByQuery (ListCouponByQueryRequest) returns (ListCouponByQueryResponse) {
+    option (google.api.http) = {
+      post: "/discounts/my"
+      response_body: "*"
+    };
+  }
+  rpc ListCoupon (ListCouponRequest) returns (ListCouponResponse) {
     option (google.api.http) = {
       get: "/discounts/coupons"
       response_body: "*"
@@ -20,10 +38,45 @@ service CouponAPI {
 message ListCouponByQueryRequest {
   hpoc.shared.types.request.v1.List params = 1;
   string query = 2;
+  Status status = 3;
+}
+
+enum Status {
+  VALID = 0;
+  INVALID = 1;
 }
 
 // The response message containing the greetings
 message ListCouponByQueryResponse{
+  repeated hpoc.miniprogram.platform.v1.MyCoupon data = 1;
+}
+
+message ListCouponRequest {
+  hpoc.shared.types.request.v1.List params = 1;
+}
+
+message ListCouponResponse {
   int32 code = 1;
   repeated hpoc.miniprogram.platform.v1.Coupon data = 2;
+}
+
+message GetCouponByIDRequest {
+  hpoc.shared.types.request.v1.Get params = 1;
+  int32 id = 2;
+  string token = 3;
+  string pwd = 4;
+}
+
+message GetCouponByIDResponse {
+  int32 code = 1;
+  string msg = 2;
+}
+
+message CreateCouponRequest {
+  hpoc.shared.types.request.v1.Create params = 1;
+  hpoc.miniprogram.platform.v1.Coupon data = 2;
+}
+
+message CreateCouponResponse {
+  hpoc.miniprogram.platform.v1.Coupon data = 1;
 }
