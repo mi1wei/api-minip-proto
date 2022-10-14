@@ -6,9 +6,11 @@ import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/category.proto";
 import "hpoc/shared/types/request/v1/create.proto";
 import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/get.proto";
 
 service CategoryAPI {
   rpc CreateCategory (CreateCategoryRequest) returns (CreateCategoryResponse);
+  rpc GetCategoryById (GetCategoryByIdRequest) returns (GetCategoryByIdResponse);
   rpc ListCategoryByQuery (ListCategoryByQueryRequest) returns (ListCategoryByQueryResponse) {
     option (google.api.http) = {
       get: "/shop/goods/category/all"
@@ -39,4 +41,14 @@ message ListCategoryByQueryRequest {
 message ListCategoryByQueryResponse{
   int32 code = 1;
   repeated hpoc.miniprogram.platform.v1.Category data = 2;
+}
+
+message GetCategoryByIdRequest{
+  hpoc.shared.types.request.v1.Get params = 1;
+  string id = 2;
+}
+
+message GetCategoryByIdResponse{
+  int32 code = 1;
+  Category category = 2;
 }

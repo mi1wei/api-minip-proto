@@ -17,6 +17,12 @@ service GoodAPI {
       body: "*"
     };
   }
+  rpc GetGoodDetailById (GetGoodDetailByIdRequest) returns (GetGoodDetailByIdResponse) {
+    option (google.api.http) = {
+      get: "/shop/goods/detail"
+      response_body: "*"
+    };
+  }
   rpc GetGoodByID (GetGoodByIDRequest) returns (GetGoodByIDResponse);
 }
 
@@ -50,4 +56,16 @@ message GetGoodByIDRequest{
 
 message GetGoodByIDResponse{
   Good good = 1;
+}
+
+message GetGoodDetailByIdRequest{
+  hpoc.shared.types.request.v1.Get params = 1;
+  string id = 2;
+  string token = 3;
+}
+
+message GetGoodDetailByIdResponse{
+  int32 code = 1;
+  GoodDetailData data = 2;
+  string message = 3;
 }

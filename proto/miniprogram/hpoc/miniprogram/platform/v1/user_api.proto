@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/user.proto";
+import "google/api/field_behavior.proto";
+
+service UserAPI {
+  rpc UpdateUserInfo (UpdateUserInfoRequest) returns (UpdateUserInfoResponse) {
+    option (google.api.http) = {
+      get: "/user/modify"
+      response_body: "*"
+    };
+  }
+  rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse) {
+    option (google.api.http) = {
+      get: "/user/detail"
+      response_body: "*"
+    };
+  }
+}
+
+message UpdateUserInfoRequest {
+  string token = 1[(google.api.field_behavior) = REQUIRED];
+  string avatarUrl = 2;
+  string city = 3;
+  int32 gender = 4;
+  string nick = 5;
+  string province = 6;
+}
+
+message UpdateUserInfoResponse {
+  int32 code = 1;
+  UserInfo data = 2;
+  string msg = 3;
+}
+
+message GetUserInfoRequest {
+  string token = 1[(google.api.field_behavior) = REQUIRED];
+}
+
+message GetUserInfoResponse {
+  int32 code = 1;
+  UserInfo data = 2;
+  string msg = 3;
+}

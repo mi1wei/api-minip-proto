@@ -3,25 +3,41 @@ syntax = "proto3";
 package hpoc.miniprogram.platform.v1;
 
 import "google/api/annotations.proto";
-import "hpoc/miniprogram/platform/v1/good.proto";
+import "hpoc/miniprogram/platform/v1/auth.proto";
 import "google/api/field_behavior.proto";
 
 service AuthAPI {
-  rpc GetTokenByAuthCode (GetTokenByAuthCodeRequest) returns (GetTokenByAuthCodeResponse) {
+  rpc CheckToken (CheckTokenRequest) returns (CheckTokenResponse) {
     option (google.api.http) = {
-      post: "/shop/goods/list/v2"
+      get: "/user/check-token"
+      response_body: "*"
+    };
+  }
+
+  rpc SignIn (SignInRequest) returns (SignInResponse) {
+    option (google.api.http) = {
+      post: "/user/wxapp/authorize"
       body: "*"
     };
   }
 }
 
-// The request message containing the user's name
-message GetTokenByAuthCodeRequest {
-  int32 code = 1[(google.api.field_behavior) = REQUIRED];
+message CheckTokenRequest {
+  string token = 1[(google.api.field_behavior) = REQUIRED];
 }
 
-// The response message containing the greetings
-message GetTokenByAuthCodeResponse{
+message CheckTokenResponse {
   int32 code = 1;
-  string token = 2;
+  string msg = 2;
+}
+
+message SignInRequest {
+  string code = 1[(google.api.field_behavior) = REQUIRED];
+  string referrer = 2[(google.api.field_behavior) = REQUIRED];
+}
+
+message SignInResponse {
+  int32 code = 1;
+  SignInfo data = 2;
+  string msg = 3;
 }

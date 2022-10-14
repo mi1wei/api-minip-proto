@@ -5,6 +5,7 @@ package hpoc.miniprogram.platform.v1;
 import "google/api/field_behavior.proto";
 import "hpoc/miniprogram/platform/v1/operation.proto";
 import "hpoc/shared/types/meta/v1/metadata.proto";
+import "hpoc/miniprogram/platform/v1/category.proto";
 
 message Good{
   int32 id = 1 [(google.api.field_behavior) = REQUIRED];
@@ -25,14 +26,33 @@ message Good{
   int32 score = 15[(google.api.field_behavior) = REQUIRED];
   bool sellEnd = 16[(google.api.field_behavior) = REQUIRED];
   bool sellStart = 17[(google.api.field_behavior) = REQUIRED];
+  bool videoId = 18[(google.api.field_behavior) = REQUIRED];
+  bool videoMp4Src = 19[(google.api.field_behavior) = REQUIRED];
+  repeated PicInfo pics = 20;
+  repeated string details = 21;
+  int32 shopId = 22;
 
   Operation operation = 50[(google.api.field_behavior) = OUTPUT_ONLY];
   hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
-
 }
 
 message GoodData{
   repeated Good result = 1[(google.api.field_behavior) = REQUIRED];
   int32 totalPage = 2[(google.api.field_behavior) = REQUIRED];
   int32 totalRow = 3[(google.api.field_behavior) = REQUIRED];
+}
+
+message PicInfo{
+  int32 goodsId = 1;
+  int32 id = 2;
+  string pic = 3;
+  int32 userId = 4;
+}
+
+message GoodDetailData{
+  Good basicInfo = 1[(google.api.field_behavior) = REQUIRED];
+  Category category = 2[(google.api.field_behavior) = REQUIRED];
+  string content = 3;
+  repeated PicInfo pics = 4;
+  repeated string pics2 = 5;
 }
