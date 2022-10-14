@@ -9,13 +9,13 @@ import "hpoc/shared/types/request/v1/create.proto";
 
 service CouponAPI {
   rpc CreateCoupon (CreateCouponRequest) returns (CreateCouponResponse) {
-    option (goole.api.http) = {
+    option (google.api.http) = {
       post: "/discounts/set"
       response_body: "*"
     };
   }
   rpc GetCouponByID (GetCouponByIDRequest) returns (GetCouponByIDResponse) {
-    option (goole.api.http) = {
+    option (google.api.http) = {
       post: "/discounts/fetch"
       response_body: "*"
     };
