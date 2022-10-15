@@ -23,7 +23,6 @@ service AuthAPI {
 }
 
 message CheckTokenRequest {
-  string token = 1[(google.api.field_behavior) = REQUIRED];
 }
 
 message CheckTokenResponse {

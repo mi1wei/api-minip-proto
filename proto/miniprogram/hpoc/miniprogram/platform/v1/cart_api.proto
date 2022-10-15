@@ -53,7 +53,6 @@ service CartAPI {
 // The request message containing the user's name
 message CreateCartItemRequest {
   hpoc.shared.types.request.v1.Create params = 1;
-  string token = 2;
   int32 goodsId = 3;
   int32 number = 4;
   string sku = 5;
@@ -73,10 +72,9 @@ message CreateCartItemResponse{
 
 
 message SeleteCartItemByKeyRequest{
-  string token = 1;
-  string key = 2;
-  bool selected = 3;
-  string type = 4;
+  string key = 1;
+  bool selected = 2;
+  string type = 3;
 }
 
 message SeleteCartItemByKeyResponse{
@@ -87,8 +85,7 @@ message SeleteCartItemByKeyResponse{
 
 message ListCartItemsByQueryRequest{
   hpoc.shared.types.request.v1.List params = 1;
-  string token = 2;
-  string type = 3;
+  string type = 2;
 }
 
 message ListCartItemsByQueryResponse{
@@ -99,7 +96,6 @@ message ListCartItemsByQueryResponse{
 
 message UpdateCartItemNumberByKeyRequest{
   hpoc.shared.types.request.v1.Update params = 1;
-  string token = 2;
   string key = 3;
   int32 number = 4;
   string type = 5;
@@ -113,9 +109,8 @@ message UpdateCartItemNumberByKeyResponse{
 
 message DeleteCartItemByKeyRequest{
   hpoc.shared.types.request.v1.Delete params = 1;
-  string token = 2;
-  string key = 3;
-  string type = 5;
+  string key = 2;
+  string type = 3;
 }
 
 message DeleteCartItemByKeyResponse{

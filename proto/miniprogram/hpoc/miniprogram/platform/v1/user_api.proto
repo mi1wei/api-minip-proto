@@ -22,12 +22,11 @@ service UserAPI {
 }
 
 message UpdateUserInfoRequest {
-  string token = 1[(google.api.field_behavior) = REQUIRED];
-  string avatarUrl = 2;
-  string city = 3;
-  int32 gender = 4;
-  string nick = 5;
-  string province = 6;
+  string avatarUrl = 1;
+  string city = 2;
+  int32 gender = 3;
+  string nick = 4;
+  string province = 5;
 }
 
 message UpdateUserInfoResponse {
@@ -37,7 +36,6 @@ message UpdateUserInfoResponse {
 }
 
 message GetUserInfoRequest {
-  string token = 1[(google.api.field_behavior) = REQUIRED];
 }
 
 message GetUserInfoResponse {

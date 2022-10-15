@@ -23,7 +23,6 @@ service GoodAPI {
       response_body: "*"
     };
   }
-  rpc GetGoodByID (GetGoodByIDRequest) returns (GetGoodByIDResponse);
 }
 
 // The request message containing the user's name
@@ -61,7 +60,6 @@ message GetGoodByIDResponse{
 message GetGoodDetailByIdRequest{
   hpoc.shared.types.request.v1.Get params = 1;
   string id = 2;
-  string token = 3;
 }
 
 message GetGoodDetailByIdResponse{
