@@ -6,9 +6,28 @@ import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/coupon.proto";
 import "hpoc/shared/types/request/v1/list.proto";
 import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
 
 service CouponAPI {
-  rpc ListCouponByQuery (ListCouponByQueryRequest) returns (ListCouponByQueryResponse) {
+  rpc CreateCoupon (CreateCouponRequest) returns (CreateCouponResponse) {
+    option (google.api.http) = {
+      post: "/discounts/set"
+      response_body: "*"
+    };
+  }
+  rpc GetCouponByID (GetCouponByIDRequest) returns (GetCouponByIDResponse) {
+    option (google.api.http) = {
+      post: "/discounts/fetch"
+      response_body: "*"
+    };
+  }
+  rpc ListCouponByToken (ListCouponByTokenRequest) returns (ListCouponByTokenResponse) {
+    option (google.api.http) = {
+      post: "/discounts/my"
+      response_body: "*"
+    };
+  }
+  rpc ListCoupon (ListCouponRequest) returns (ListCouponResponse) {
     option (google.api.http) = {
       get: "/discounts/coupons"
       response_body: "*"
@@ -17,13 +36,49 @@ service CouponAPI {
 }
 
 // The request message containing the user's name
-message ListCouponByQueryRequest {
+message ListCouponByTokenRequest {
   hpoc.shared.types.request.v1.List params = 1;
-  string query = 2;
+  string token = 2;
+  Status status = 3;
+}
+
+enum Status {
+  VALID = 0;
+  INVALID = 1;
 }
 
 // The response message containing the greetings
-message ListCouponByQueryResponse{
+message ListCouponByTokenResponse{
+  int32 code = 1;
+  repeated hpoc.miniprogram.platform.v1.MyCoupon data = 2;
+}
+
+message ListCouponRequest {
+  hpoc.shared.types.request.v1.List params = 1;
+}
+
+message ListCouponResponse {
   int32 code = 1;
   repeated hpoc.miniprogram.platform.v1.Coupon data = 2;
+}
+
+message GetCouponByIDRequest {
+  hpoc.shared.types.request.v1.Get params = 1;
+  string id = 2;
+  string token = 3;
+  string pwd = 4;
+}
+
+message GetCouponByIDResponse {
+  int32 code = 1;
+  string msg = 2;
+}
+
+message CreateCouponRequest {
+  hpoc.shared.types.request.v1.Create params = 1;
+  hpoc.miniprogram.platform.v1.Coupon coupon = 2;
+}
+
+message CreateCouponResponse {
+  hpoc.miniprogram.platform.v1.Coupon coupon = 1;
 }
