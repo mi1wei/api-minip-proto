@@ -7,13 +7,13 @@ import "hpoc/miniprogram/platform/v1/operation.proto";
 import "hpoc/shared/types/meta/v1/metadata.proto";
 
 message MyCoupon {
-  string token = 1[(google.api.field_behavior) = REQUIRED];
   string id = 2[(google.api.field_behavior) = REQUIRED];
   string name = 3[(google.api.field_behavior) = REQUIRED];
   int64 dateEnd = 4[(google.api.field_behavior) = REQUIRED];
   int32 moneyHreshold = 5[(google.api.field_behavior) = REQUIRED];
   MoneyType moneyType = 6[(google.api.field_behavior) = REQUIRED];
   int32 money = 7[(google.api.field_behavior) = REQUIRED];
+  Operation operation = 50 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 message Coupon{

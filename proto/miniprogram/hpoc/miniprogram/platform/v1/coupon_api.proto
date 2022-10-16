@@ -21,7 +21,7 @@ service CouponAPI {
       response_body: "*"
     };
   }
-  rpc ListCouponByToken (ListCouponByTokenRequest) returns (ListCouponByTokenResponse) {
+  rpc ListMyCoupon (ListMyCouponRequest) returns (ListMyCouponResponse) {
     option (google.api.http) = {
       post: "/discounts/my"
       response_body: "*"
@@ -36,10 +36,9 @@ service CouponAPI {
 }
 
 // The request message containing the user's name
-message ListCouponByTokenRequest {
+message ListMyCouponRequest {
   hpoc.shared.types.request.v1.List params = 1;
-  string token = 2;
-  Status status = 3;
+  Status status = 2;
 }
 
 enum Status {
@@ -48,7 +47,7 @@ enum Status {
 }
 
 // The response message containing the greetings
-message ListCouponByTokenResponse{
+message ListMyCouponResponse{
   int32 code = 1;
   repeated hpoc.miniprogram.platform.v1.MyCoupon data = 2;
 }
@@ -65,8 +64,7 @@ message ListCouponResponse {
 message GetCouponByIDRequest {
   hpoc.shared.types.request.v1.Get params = 1;
   string id = 2;
-  string token = 3;
-  string pwd = 4;
+  string pwd = 3;
 }
 
 message GetCouponByIDResponse {
