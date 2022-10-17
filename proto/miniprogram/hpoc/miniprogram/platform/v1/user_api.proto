@@ -12,14 +12,14 @@ import "hpoc/shared/types/request/v1/get.proto";
 service UserAPI {
   rpc UpdateUserByID (UpdateUserByIDRequest) returns (UpdateUserByIDResponse) {
     option (google.api.http) = {
-      get: "/user/modify"
-      response_body: "*"
+      post: "/user/modify"
+      body: "*"
     };
   }
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
     option (google.api.http) = {
-      get: "/user/add"
-      response_body: "*"
+      post: "/user/add"
+      body: "*"
     };
   }
   rpc GetUserByID (GetUserByIDRequest) returns (GetUserByIDResponse) {
