@@ -5,15 +5,24 @@ package hpoc.miniprogram.platform.v1;
 import "google/api/annotations.proto";
 import "hpoc/miniprogram/platform/v1/user.proto";
 import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/update.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
 
 service UserAPI {
-  rpc UpdateUserInfo (UpdateUserInfoRequest) returns (UpdateUserInfoResponse) {
+  rpc UpdateUserByID (UpdateUserByIDRequest) returns (UpdateUserByIDResponse) {
     option (google.api.http) = {
       get: "/user/modify"
       response_body: "*"
     };
   }
-  rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse) {
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      get: "/user/add"
+      response_body: "*"
+    };
+  }
+  rpc GetUserByID (GetUserByIDRequest) returns (GetUserByIDResponse) {
     option (google.api.http) = {
       get: "/user/detail"
       response_body: "*"
@@ -28,24 +37,41 @@ service UserAPI {
   }
 }
 
-message UpdateUserInfoRequest {
-  string avatarUrl = 1;
-  string city = 2;
-  int32 gender = 3;
-  string nick = 4;
-  string province = 5;
+message UpdateUserByIDRequest {
+  hpoc.shared.types.request.v1.Update params = 1;
+  string avatarUrl = 2;
+  string city = 3;
+  int32 gender = 4;
+  string nick = 5;
+  string province = 6;
 }
 
-message UpdateUserInfoResponse {
+message UpdateUserByIDResponse {
   int32 code = 1;
   UserInfo data = 2;
   string msg = 3;
 }
 
-message GetUserInfoRequest {
+message CreateUserRequest {
+  hpoc.shared.types.request.v1.Create params = 1;
+  string avatarUrl = 2;
+  string city = 3;
+  int32 gender = 4;
+  string nick = 5;
+  string province = 6;
 }
 
-message GetUserInfoResponse {
+message CreateUserResponse {
+  int32 code = 1;
+  UserInfo data = 2;
+  string msg = 3;
+}
+
+message GetUserByIDRequest {
+  hpoc.shared.types.request.v1.Get params = 1;
+}
+
+message GetUserByIDResponse {
   int32 code = 1;
   UserInfo data = 2;
   string msg = 3;
