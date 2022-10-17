@@ -23,3 +23,11 @@ message BaseInfo{
   int32 status = 7;
   string statusStr =8;
 }
+
+message UserAmount {
+  float balance = 1;
+  float freeze = 2;
+  int64 score = 3;
+  int64 growth = 4;
+  float totleConsumed = 5;
+}
