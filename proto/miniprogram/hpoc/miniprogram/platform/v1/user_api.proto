@@ -28,6 +28,13 @@ service UserAPI {
       response_body: "*"
     };
   }
+
+  rpc GetUserAmount (GetUserAmountRequest) returns (GetUserAmountResponse) {
+    option (google.api.http) = {
+      get: "/user/amount"
+      response_body: "*"
+    };
+  }
 }
 
 message UpdateUserByIDRequest {
@@ -68,4 +75,11 @@ message GetUserByIDResponse {
   int32 code = 1;
   UserInfo data = 2;
   string msg = 3;
+}
+
+message GetUserAmountRequest {}
+
+message GetUserAmountResponse {
+  int32 code = 1;
+  UserAmount data = 2;
 }
