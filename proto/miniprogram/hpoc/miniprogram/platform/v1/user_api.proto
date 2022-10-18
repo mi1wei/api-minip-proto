@@ -44,6 +44,7 @@ message UpdateUserByIDRequest {
   int32 gender = 4;
   string nick = 5;
   string province = 6;
+  string extJsonStr = 7;
 }
 
 message UpdateUserByIDResponse {
