@@ -26,11 +26,12 @@ message Good{
   int32 score = 15[(google.api.field_behavior) = REQUIRED];
   bool sellEnd = 16[(google.api.field_behavior) = REQUIRED];
   bool sellStart = 17[(google.api.field_behavior) = REQUIRED];
-  bool videoId = 18[(google.api.field_behavior) = REQUIRED];
-  bool videoMp4Src = 19[(google.api.field_behavior) = REQUIRED];
+  int32 videoId = 18[(google.api.field_behavior) = REQUIRED];
+  string videoMp4Src = 19[(google.api.field_behavior) = REQUIRED];
   repeated PicInfo pics = 20;
   repeated string details = 21;
   int32 shopId = 22;
+  GoodLable label = 23;
 
   Operation operation = 50[(google.api.field_behavior) = OUTPUT_ONLY];
   hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -55,4 +56,10 @@ message GoodDetailData{
   string content = 3;
   repeated PicInfo pics = 4;
   repeated string pics2 = 5;
+}
+
+enum GoodLable {
+  GOOD_LABEL_UNSPECIFIED = 0;
+  GOOD_LABEL_RECOMMEND = 1;
+  GOOD_LABEL_SECKILL = 2;
 }
