@@ -33,17 +33,18 @@ service CouponAPI {
       response_body: "*"
     };
   }
+  rpc GetMyCouponDetailByID (GetMyCouponDetailByIDRequest) returns (GetMyCouponDetailByIDResponse) {
+    option (google.api.http) = {
+      get: "/discounts/detail"
+      response_body: "*"
+    };
+  }
 }
 
 // The request message containing the user's name
 message ListMyCouponRequest {
   hpoc.shared.types.request.v1.List params = 1;
-  Status status = 2;
-}
-
-enum Status {
-  VALID = 0;
-  INVALID = 1;
+  int32 status = 2;
 }
 
 // The response message containing the greetings
@@ -79,4 +80,15 @@ message CreateCouponRequest {
 
 message CreateCouponResponse {
   hpoc.miniprogram.platform.v1.Coupon coupon = 1;
+}
+
+message GetMyCouponDetailByIDRequest {
+  hpoc.shared.types.request.v1.Get params = 1;
+  string id = 2;
+}
+
+message GetMyCouponDetailByIDResponse {
+  int32 code = 1;
+  string msg = 2;
+  repeated hpoc.miniprogram.platform.v1.CouponRefs data = 3;
 }
