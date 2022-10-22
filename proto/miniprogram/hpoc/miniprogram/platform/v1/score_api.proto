@@ -13,14 +13,33 @@ service ScoreAPI {
         response_body: "*"
       };
     }
+    rpc GetScoreLog (GetScoreLogRequest) returns (GetScoreLogResponse) {
+      option (google.api.http) = {
+        post: "/score/sign/logs"
+        response_body: "*"
+      };
+    }
 }
 
-message UpdateScoreRequest {
-    hpoc.shared.types.request.v1.Create params = 1;
-    int64 score = 2;
-}
+message UpdateScoreRequest {}
 
 message UpdateScoreResponse {
-    int64 code = 1;
+    int32 code = 1;
     string msg = 2;
+}
+
+message GetScoreLogRequest {
+  hpoc.shared.types.request.v1.Get params = 1;
+}
+
+message Data {
+  int64 continuous = 1;
+  string dateAdd = 2;
+  string userId = 3;
+}
+
+message GetScoreLogResponse {
+  int32 code = 1;
+  repeated Data data = 2;
+  string msg = 3;
 }
