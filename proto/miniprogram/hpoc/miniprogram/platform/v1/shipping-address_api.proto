@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/shipping-address.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/update.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
+
+service ShippingAddressAPI {
+  rpc CreateShippingAddress (CreateShippingAddressRequest) returns (CreateShippingAddressResponse) {
+    option (google.api.http) = {
+      post: "/user/shipping-address/add"
+      body: "*"
+    };
+  }
+  rpc ListShippingAddress (ListShippingAddressRequest) returns (ListShippingAddressResponse) {
+    option (google.api.http) = {
+      get: "/user/shipping-address/list"
+      response_body: "*"
+    };
+  }
+  rpc GetShippingAddress (GetShippingAddressRequest) returns (GetShippingAddressResponse) {
+    option (google.api.http) = {
+      get: "/user/shipping-address/detail/v2"
+      response_body: "*"
+    };
+  }
+  rpc UpdateShippingAddress (UpdateShippingAddressRequest) returns (UpdateShippingAddressResponse) {
+    option (google.api.http) = {
+      post: "/user/shipping-address/update"
+      body: "*"
+    };
+  }
+  rpc DeleteShippingAddress (DeleteShippingAddressRequest) returns (DeleteShippingAddressResponse) {
+    option (google.api.http) = {
+      post: "/user/shipping-address/delete"
+      body: "*"
+    };
+  }
+}
+
+message CreateShippingAddressRequest {
+    hpoc.miniprogram.platform.v1.ShippingAddress data = 1;
+}
+
+message CreateShippingAddressResponse {
+    int32 code = 1;
+    string msg = 2;
+    hpoc.miniprogram.platform.v1.ShippingAddress data = 3;
+}
+
+message ListShippingAddressRequest {}
+
+message ListShippingAddressResponse {
+  int32 code = 1;
+  string msg = 2;
+  repeated hpoc.miniprogram.platform.v1.ShippingAddress data = 3;
+}
+
+message GetShippingAddressRequest {
+  string id = 1;
+}
+
+message GetShippingAddressResponse {
+  int32 code = 1;
+  string msg = 2;
+  hpoc.miniprogram.platform.v1.ShippingAddress data = 3;
+}
+
+message UpdateShippingAddressRequest {
+  hpoc.miniprogram.platform.v1.ShippingAddress data = 1;
+}
+
+message UpdateShippingAddressResponse {
+  int32 code = 1;
+  string msg = 2;
+  hpoc.miniprogram.platform.v1.ShippingAddress data = 3;
+}
+
+message DeleteShippingAddressRequest {
+  string id = 1;
+}
+
+message DeleteShippingAddressResponse {
+  int32 code = 1;
+  string msg = 2;
+}

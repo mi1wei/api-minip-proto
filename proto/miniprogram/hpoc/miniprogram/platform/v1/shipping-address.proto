@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/field_behavior.proto";
+import "hpoc/miniprogram/platform/v1/operation.proto";
+import "hpoc/shared/types/meta/v1/metadata.proto";
+
+message ShippingAddress {
+  string id = 1[(google.api.field_behavior) = REQUIRED];
+  string province = 2[(google.api.field_behavior) = REQUIRED];
+  string city = 3[(google.api.field_behavior) = REQUIRED];
+  string areas = 4[(google.api.field_behavior) = REQUIRED];
+  string linkMan = 5[(google.api.field_behavior) = REQUIRED];
+  string mobile = 6[(google.api.field_behavior) = REQUIRED];
+  string address = 7[(google.api.field_behavior) = REQUIRED];
+  bool isDefault = 8[(google.api.field_behavior) = REQUIRED];
+  bool deleted = 9[(google.api.field_behavior) = REQUIRED];
+
+  Operation operation = 50 [(google.api.field_behavior) = OUTPUT_ONLY];
+  hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
