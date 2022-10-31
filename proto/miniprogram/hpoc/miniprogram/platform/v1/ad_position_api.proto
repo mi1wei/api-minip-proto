@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/ad_position.proto";
+import "google/api/field_behavior.proto";
+
+service AdPositionAPI {
+    rpc GetAdPosition (GetAdPositionRequest) returns (GetAdPositionResponse) {
+        option (google.api.http) = {
+          get: "/site/adPosition/info"
+          response_body: "*"
+        };
+      }
+      rpc CreateAdPosition (CreateAdPositionRequest) returns (CreateAdPositionResponse) {
+        option (google.api.http) = {
+          post: "/site/adPosition/add"
+          body: "*"
+        };
+      }
+}
+
+message GetAdPositionRequest {
+    string key = 1;
+}
+
+message GetAdPositionResponse {
+    int32 code = 1;
+    hpoc.miniprogram.platform.v1.AdPosition data = 2;
+}
+
+message CreateAdPositionRequest {
+    hpoc.miniprogram.platform.v1.AdPosition data = 1;
+}
+
+message CreateAdPositionResponse {
+    hpoc.miniprogram.platform.v1.AdPosition data = 1;
+}
