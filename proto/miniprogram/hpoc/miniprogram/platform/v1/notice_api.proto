@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/notice.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
+
+service NoticeAPI {
+  rpc CreateNotice (CreateNoticeRequest) returns (CreateNoticeResponse);
+  rpc ListNoticeByQuery (ListNoticeByQueryRequest) returns (ListNoticeByQueryResponse) {
+    option (google.api.http) = {
+      post: "/notice/list"
+      body: "*"
+    };
+  }
+  rpc GetNoticeByID (GetNoticeByIDRequest) returns (GetNoticeByIDResponse) {
+    option (google.api.http) = {
+      get: "/notice/detail"
+      response_body: "*"
+    };
+  }
+}
+
+
+message CreateNoticeRequest {
+  hpoc.shared.types.request.v1.Create params = 1;
+  Notice notice = 2;
+}
+
+message CreateNoticeResponse {
+  Notice notice = 1;
+}
+
+// The request message containing the user's name
+message ListNoticeByQueryRequest {
+  hpoc.shared.types.request.v1.List params = 1;
+  int32 page = 2[(google.api.field_behavior) = REQUIRED];
+  int32 pageSize = 3[(google.api.field_behavior) = REQUIRED];
+}
+
+// The response message containing the greetings
+message ListNoticeByQueryResponse{
+  int32 code = 1;
+  hpoc.miniprogram.platform.v1.NoticeData data = 2;
+  string msg = 3;
+}
+
+message GetNoticeByIDRequest {
+  hpoc.shared.types.request.v1.Get params = 1;
+  int32 id = 2[(google.api.field_behavior) = REQUIRED];
+}
+
+// The response message containing the greetings
+message GetNoticeByIDResponse{
+  int32 code = 1;
+  hpoc.miniprogram.platform.v1.Notice data = 2;
+  string msg = 3;
+}

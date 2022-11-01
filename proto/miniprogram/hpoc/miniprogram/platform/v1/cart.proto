@@ -2,30 +2,31 @@ syntax = "proto3";
 
 package hpoc.miniprogram.platform.v1;
 
-import "google/api/field_behavior.proto";
 import "hpoc/miniprogram/platform/v1/operation.proto";
 import "hpoc/shared/types/meta/v1/metadata.proto";
-
+import "google/api/field_behavior.proto";
 
 message CartData{
-  repeated goodsStatus goodsStatus = 1;
-  repeated cartItem items = 2;
+  repeated GoodStatus goodsStatus = 1;
+  repeated CartItem items = 2;
   int32 number = 3;
   int32 price = 4;
   int32 score = 5;
   repeated shopList shopList = 6;
+
+  Operation operation = 50 [(google.api.field_behavior) = OUTPUT_ONLY];
+  hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
-message goodsStatus {
+message GoodStatus {
   int32 id = 1;
-  bool sellEnd = 2;
-  bool sellStart = 3;
+  bool sell_end = 2;
+  bool sell_start = 3;
   int32 status = 4;
-  string statusStr = 5;
   int32 stores = 6;
 }
 
-message cartItem {
+message CartItem {
   int32 categoryId = 1;
   int32 goodsId = 2;
   string key = 3;

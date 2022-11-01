@@ -7,6 +7,7 @@ import "hpoc/miniprogram/platform/v1/operation.proto";
 import "hpoc/shared/types/meta/v1/metadata.proto";
 import "hpoc/miniprogram/platform/v1/category.proto";
 
+
 message Good{
   int32 id = 1 [(google.api.field_behavior) = REQUIRED];
   bool hasAddition = 2 [(google.api.field_behavior) = REQUIRED];
@@ -59,7 +60,7 @@ message GoodDetailData{
 }
 
 enum GoodLable {
-  GOOD_LABEL_UNSPECIFIED = 0;
-  GOOD_LABEL_RECOMMEND = 1;
-  GOOD_LABEL_SECKILL = 2;
+  GOOD_LABLE_UNSPECIFIED = 0;
+  GOOD_LABLE_RECOMMEND = 1;
+  GOOD_LABLE_SECKILL = 2;
 }
