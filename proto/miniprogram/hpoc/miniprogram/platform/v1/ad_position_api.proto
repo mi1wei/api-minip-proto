@@ -31,9 +31,15 @@ message GetAdPositionResponse {
 }
 
 message CreateAdPositionRequest {
-    hpoc.miniprogram.platform.v1.AdPosition data = 1;
+    repeated hpoc.miniprogram.platform.v1.AdPosition ad_positions = 1;
+}
+
+message AdPositionStatus {
+  string ad_position_id = 1;
+  string ad_position_name = 2;
+  string message = 3;
 }
 
 message CreateAdPositionResponse {
-    hpoc.miniprogram.platform.v1.AdPosition data = 1;
+  repeated AdPositionStatus failed_cases = 1;
 }
