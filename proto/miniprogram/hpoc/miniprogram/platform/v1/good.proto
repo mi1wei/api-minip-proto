@@ -9,18 +9,19 @@ import "hpoc/miniprogram/platform/v1/category.proto";
 
 
 message Good{
-  int32 id = 1 [(google.api.field_behavior) = REQUIRED];
-  bool hasAddition = 2 [(google.api.field_behavior) = REQUIRED];
-  string propertyIds = 3 [(google.api.field_behavior) = REQUIRED];
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string categoryId = 2[(google.api.field_behavior) = REQUIRED];
 
-  string characteristic = 4[(google.api.field_behavior) = REQUIRED];
-  string name = 5[(google.api.field_behavior) = REQUIRED];
-  string pic = 6[(google.api.field_behavior) = REQUIRED];
-  int32 status = 7[(google.api.field_behavior) = REQUIRED];
-  string statusStr = 8[(google.api.field_behavior) = REQUIRED];
-  string unit = 9[(google.api.field_behavior) = REQUIRED];
-  int32 views = 10[(google.api.field_behavior) = REQUIRED];
-  int32 categoryId = 11[(google.api.field_behavior) = REQUIRED];
+  bool hasAddition = 3 [(google.api.field_behavior) = REQUIRED];
+  string propertyIds = 4 [(google.api.field_behavior) = REQUIRED];
+
+  string characteristic = 5[(google.api.field_behavior) = REQUIRED];
+  string name = 6[(google.api.field_behavior) = REQUIRED];
+  string pic = 7[(google.api.field_behavior) = REQUIRED];
+  int32 status = 8[(google.api.field_behavior) = REQUIRED];
+  string statusStr = 9[(google.api.field_behavior) = REQUIRED];
+  string unit = 10[(google.api.field_behavior) = REQUIRED];
+  int32 views = 11[(google.api.field_behavior) = REQUIRED];
   int32 minPrice = 12[(google.api.field_behavior) = REQUIRED];
   int32 originalPrice = 13[(google.api.field_behavior) = REQUIRED];
   int32 stores = 14[(google.api.field_behavior) = REQUIRED];

@@ -4,13 +4,16 @@ package hpoc.miniprogram.platform.v1;
 
 import "google/api/field_behavior.proto";
 import "hpoc/miniprogram/platform/v1/operation.proto";
+import "hpoc/shared/types/meta/v1/metadata.proto";
 
 message Category{
-  string icon = 1[(google.api.field_behavior) = REQUIRED];
-  bool isUse = 2[(google.api.field_behavior) = REQUIRED];
-  string name = 3[(google.api.field_behavior) = REQUIRED];
-  int32 level = 4[(google.api.field_behavior) = REQUIRED];
-  int32 id = 5[(google.api.field_behavior) = REQUIRED];
+  string id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string icon = 2[(google.api.field_behavior) = REQUIRED];
+  bool isUse = 3[(google.api.field_behavior) = REQUIRED];
+  string name = 4[(google.api.field_behavior) = REQUIRED];
+  int32 level = 5[(google.api.field_behavior) = REQUIRED];
+
 
   Operation operation = 50 [(google.api.field_behavior) = OUTPUT_ONLY];
+  hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

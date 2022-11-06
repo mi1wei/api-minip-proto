@@ -53,7 +53,8 @@ service CartAPI {
 // The request message containing the user's name
 message CreateCartItemRequest {
   hpoc.shared.types.request.v1.Create params = 1;
-  int32 goodsId = 3;
+  string id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string goodsId = 3;
   int32 number = 4;
   string sku = 5;
   string addition = 6;

@@ -28,7 +28,7 @@ service GoodAPI {
 // The request message containing the user's name
 message ListGoodByQueryRequest {
   hpoc.shared.types.request.v1.List params = 1;
-  int32 categoryId = 2[(google.api.field_behavior) = REQUIRED];
+  string categoryId = 2[(google.api.field_behavior) = REQUIRED];
   int32 page = 3[(google.api.field_behavior) = REQUIRED];
   int32 pageSize = 4[(google.api.field_behavior) = REQUIRED];
   GoodLable label = 5;
