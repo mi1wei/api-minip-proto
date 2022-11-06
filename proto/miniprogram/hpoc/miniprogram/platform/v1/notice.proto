@@ -7,7 +7,7 @@ import "hpoc/miniprogram/platform/v1/operation.proto";
 import "hpoc/shared/types/meta/v1/metadata.proto";
 
 message Notice{
-  int32 id = 1 [(google.api.field_behavior) = REQUIRED];
+  string id = 1  [(google.api.field_behavior) = OUTPUT_ONLY];
   string title = 2[(google.api.field_behavior) = REQUIRED];
   string content = 3[(google.api.field_behavior) = REQUIRED];
 

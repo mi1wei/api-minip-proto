@@ -51,7 +51,7 @@ message ListNoticeByQueryResponse{
 
 message GetNoticeByIDRequest {
   hpoc.shared.types.request.v1.Get params = 1;
-  int32 id = 2[(google.api.field_behavior) = REQUIRED];
+  string id = 2[(google.api.field_behavior) = REQUIRED];
 }
 
 // The response message containing the greetings
