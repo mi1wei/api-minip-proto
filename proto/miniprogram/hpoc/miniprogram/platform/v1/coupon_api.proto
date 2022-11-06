@@ -74,12 +74,17 @@ message GetCouponByIDResponse {
 }
 
 message CreateCouponRequest {
-  hpoc.shared.types.request.v1.Create params = 1;
-  hpoc.miniprogram.platform.v1.Coupon coupon = 2;
+  repeated hpoc.miniprogram.platform.v1.Coupon coupons = 2;
+}
+
+message CouponStatus {
+  string coupon_id = 1;
+  string coupon_name = 2;
+  string message = 3;
 }
 
 message CreateCouponResponse {
-  hpoc.miniprogram.platform.v1.Coupon coupon = 1;
+  repeated CouponStatus failed_cases = 1;
 }
 
 message GetMyCouponDetailByIDRequest {
