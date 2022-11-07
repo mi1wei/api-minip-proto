@@ -19,7 +19,7 @@ message CartData{
 }
 
 message GoodStatus {
-  int32 id = 1;
+  string id = 1;
   bool sell_end = 2;
   bool sell_start = 3;
   int32 status = 4;
@@ -27,8 +27,8 @@ message GoodStatus {
 }
 
 message CartItem {
-  int32 categoryId = 1;
-  int32 goodsId = 2;
+  string categoryId = 1;
+  string goodsId = 2;
   string key = 3;
   string name = 4;
   string pic = 5;

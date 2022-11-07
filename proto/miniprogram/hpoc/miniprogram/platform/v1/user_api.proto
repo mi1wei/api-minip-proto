@@ -10,15 +10,15 @@ import "hpoc/shared/types/request/v1/create.proto";
 import "hpoc/shared/types/request/v1/get.proto";
 
 service UserAPI {
-  rpc UpdateUserByID (UpdateUserByIDRequest) returns (UpdateUserByIDResponse) {
-    option (google.api.http) = {
-      post: "/user/modify"
-      body: "*"
-    };
-  }
   rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
     option (google.api.http) = {
       post: "/user/add"
+      body: "*"
+    };
+  }
+  rpc UpdateUserByID (UpdateUserByIDRequest) returns (UpdateUserByIDResponse) {
+    option (google.api.http) = {
+      post: "/user/modify"
       body: "*"
     };
   }
@@ -55,11 +55,12 @@ message UpdateUserByIDResponse {
 
 message CreateUserRequest {
   hpoc.shared.types.request.v1.Create params = 1;
-  string avatarUrl = 2;
-  string city = 3;
-  int32 gender = 4;
-  string nick = 5;
-  string province = 6;
+  string id = 2;
+  string avatarUrl = 3;
+  string city = 4;
+  int32 gender = 5;
+  string nick = 6;
+  string province = 7;
 }
 
 message CreateUserResponse {
