@@ -18,12 +18,17 @@ service BannerAPI {
 }
 
 message CreateBannerRequest{
-  hpoc.shared.types.request.v1.Create params = 1;
-  hpoc.miniprogram.platform.v1.Banner banner = 2;
+  repeated hpoc.miniprogram.platform.v1.Banner banners = 1;
+}
+
+message BannerStatus {
+  string banner_id = 1;
+  string banner_name = 2;
+  string message = 3;
 }
 
 message CreateBannerResponse{
-  hpoc.miniprogram.platform.v1.Banner banner = 1;
+  repeated BannerStatus failed_cases = 1;
 }
 // The request message containing the user's name
 message ListBannerByQueryRequest {
