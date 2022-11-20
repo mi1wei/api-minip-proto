@@ -30,7 +30,7 @@ message Good{
   bool sellStart = 17[(google.api.field_behavior) = REQUIRED];
   int32 videoId = 18[(google.api.field_behavior) = REQUIRED];
   string videoMp4Src = 19[(google.api.field_behavior) = REQUIRED];
-  repeated PicInfo pics = 20;
+  repeated string profile = 20;
   repeated string details = 21;
   int32 shopId = 22;
   GoodLable label = 23;
@@ -45,18 +45,18 @@ message GoodData{
   int32 totalRow = 3[(google.api.field_behavior) = REQUIRED];
 }
 
-message PicInfo{
-  int32 goodsId = 1;
-  int32 id = 2;
+message GoodProfile{
+  string goodsId = 1;
+  string id = 2;
   string pic = 3;
-  int32 userId = 4;
+  string userId = 4;
 }
 
 message GoodDetailData{
   Good basicInfo = 1[(google.api.field_behavior) = REQUIRED];
   Category category = 2[(google.api.field_behavior) = REQUIRED];
   string content = 3;
-  repeated PicInfo pics = 4;
+  repeated GoodProfile pics = 4;
   repeated string pics2 = 5;
 }
 

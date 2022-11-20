@@ -20,19 +20,15 @@ service CategoryAPI {
 }
 
 message CreateCategoryRequest {
+  // Generic List endpoint params
+  hpoc.shared.types.request.v1.Create params = 1;
   // Data of application to be created
-  repeated hpoc.miniprogram.platform.v1.Category categories = 1;
-}
-
-message CategoryStatus {
-  string category_id = 1;
-  string category_name = 2;
-  string message = 3;
+  hpoc.miniprogram.platform.v1.Category category = 2;
 }
 
 message CreateCategoryResponse {
   // Newly created application object
-  repeated CategoryStatus failed_cases = 1;
+  hpoc.miniprogram.platform.v1.Category category = 1;
 }
 
 

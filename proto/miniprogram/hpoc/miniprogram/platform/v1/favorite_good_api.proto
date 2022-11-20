@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/good.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
+
+service FavoriteGoodAPI {
+  rpc CreateFavoriteGood (CreateFavoriteGoodRequest) returns (CreateFavoriteGoodResponse) {
+    option (google.api.http) = {
+      post: "/shop/goods/fav/add"
+      body: "*"
+    };
+  }
+  rpc GetFavoriteGoodById (GetFavoriteGoodByIdRequest) returns (GetFavoriteGoodByIdResponse) {
+    option (google.api.http) = {
+      get: "/shop/goods/fav/check"
+      response_body: "*"
+    };
+  }
+  rpc DeleteFavoriteGoodById (DeleteFavoriteGoodByIdRequest) returns (DeleteFavoriteGoodByIdResponse) {
+    option (google.api.http) = {
+      get: "/shop/goods/fav/delete"
+      response_body: "*"
+    };
+  }
+
+}
+
+message CreateFavoriteGoodRequest{
+  string goodsId = 1;
+}
+
+message CreateFavoriteGoodResponse{
+  int32 code = 1;
+  string message = 2;
+}
+
+message GetFavoriteGoodByIdRequest{
+  string goodsId = 1;
+}
+
+message GetFavoriteGoodByIdResponse{
+  int32 code = 1;
+  string data = 2;
+  string message = 3;
+}
+
+message DeleteFavoriteGoodByIdRequest{
+  string Id = 1;
+  string goodsId = 2;
+}
+
+message DeleteFavoriteGoodByIdResponse{
+  int32 code = 1;
+  string message = 2;
+}
+

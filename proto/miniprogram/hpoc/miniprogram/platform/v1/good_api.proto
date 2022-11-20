@@ -41,17 +41,12 @@ message ListGoodByQueryResponse{
 }
 
 message CreateGoodRequest{
-  repeated hpoc.miniprogram.platform.v1.Good goods = 1;
-}
-
-message CreateGoodStatus {
-  string good_id = 1;
-  string good_name = 2;
-  string message = 3;
+  hpoc.shared.types.request.v1.Create params = 1;
+  Good good = 2;
 }
 
 message CreateGoodResponse{
-  repeated CreateGoodStatus failed_cases = 1;
+  Good good = 1;
 }
 
 message GetGoodByIDRequest{
