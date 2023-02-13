@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/shop.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
+
+service ShopAPI {
+  rpc ListshopsByQuery (ListshopsByQueryRequest) returns (ListshopsByQueryResponse) {
+    option (google.api.http) = {
+      post: "/shop/subshop/list"
+      body: "*"
+    };
+  }
+}
+
+message ListshopsByQueryRequest{
+  hpoc.shared.types.request.v1.List params = 1;
+}
+
+message ListshopsByQueryResponse{
+  int32 code = 1;
+  repeated Shop data = 2;
+  string msg = 3;
+}

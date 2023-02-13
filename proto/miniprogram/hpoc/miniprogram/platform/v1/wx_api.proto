@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/wx.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/update.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
+
+service WxAPI {
+  rpc BindMobile (BindMobileRequest) returns (BindMobileResponse) {
+    option (google.api.http) = {
+      post: "/user/wxapp/bindMobile/v2"
+      body: "*"
+    };
+  }
+  rpc WxaQrcode (WxaQrcodeRequest) returns (WxaQrcodeResponse) {
+    option (google.api.http) = {
+      post: "/qrcode/wxa/unlimit"
+      body: "*"
+    };
+  }
+  rpc WxPrePay (WxPrePayRequest) returns (WxPrePayResponse) {
+    option (google.api.http) = {
+      post: "/pay/wx/wxapp"
+      body: "*"
+    };
+  }
+}
+
+message BindMobileRequest{
+  string code = 1;
+  string pwd = 2;
+}
+
+message BindMobileResponse{
+  int32 code = 1;
+  string data = 2;
+  string msg = 3;
+}
+
+message WxaQrcodeRequest{
+  bool autoColor = 1;
+  int32 expireHours = 2;
+  bool is_hyaline = 3;
+  string page = 4;
+  string scene = 5;
+}
+
+message WxaQrcodeResponse{
+  int32 code = 1;
+  string data = 2;
+  string msg = 3;
+}
+
+message WxPrePayRequest{
+  string content = 1;
+  int32 money = 2;
+  string nextAction = 3;
+  string payName = 4;
+  string remark = 5;
+}
+
+message WxPrePayResponse{
+  int32 code = 1;
+  PrePay data = 2;
+  string msg = 3;
+}

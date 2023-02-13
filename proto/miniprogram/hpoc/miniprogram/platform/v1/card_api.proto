@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
+
+service CardAPI {
+  rpc GetCardById (GetCardByIdRequest) returns (GetCardByIdResponse) {
+    option (google.api.http) = {
+      get: "/card/my"
+      response_body: "*"
+    };
+  }
+}
+
+message GetCardByIdRequest{
+  hpoc.shared.types.request.v1.Get params = 1;
+}
+
+message GetCardByIdResponse{
+  int32 code = 1;
+  string msg = 3;
+}

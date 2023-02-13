@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/annotations.proto";
+import "hpoc/miniprogram/platform/v1/order.proto";
+import "google/api/field_behavior.proto";
+import "hpoc/shared/types/request/v1/list.proto";
+import "hpoc/shared/types/request/v1/create.proto";
+import "hpoc/shared/types/request/v1/get.proto";
+
+service OrderAPI {
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse) {
+    option (google.api.http) = {
+      post: "/order/create"
+      body: "*"
+    };
+  }
+  rpc GetOrderStatistics (GetOrderStatisticsRequest) returns (GetOrderStatisticsResponse) {
+    option (google.api.http) = {
+      get: "/order/statistics"
+      response_body: "*"
+    };
+  }
+  rpc ListOrderById (ListOrderByIdRequest) returns (ListOrderByIdResponse) {
+    option (google.api.http) = {
+      post: "/order/list"
+      body: "*"
+    };
+  }
+  rpc GetOrderById (GetOrderByIdRequest) returns (GetOrderByIdResponse) {
+    option (google.api.http) = {
+      post: "/order/detail"
+      body: "*"
+    };
+  }
+}
+
+message CreateOrderRequest{
+  hpoc.shared.types.request.v1.Create params = 1;
+  string goodsJsonStr = 2;
+  string remark = 3;
+  string peisongType = 4;
+  int32 goodsType = 5;
+  string cardId = 6;
+  string couponId = 7;
+
+  // for calculate order amount
+  bool calculate = 10;
+
+  //// for create real order
+  // for zt
+  int32 shopIdZt = 11;
+  string shopNameZt = 12;
+
+  // for kd
+  string address = 13;
+  string linkMan = 14;
+  string mobile = 15;
+
+  // for common
+  string extJsonStr = 16;
+}
+
+message CreateOrderResponse{
+  int32 code = 1;
+  Order data = 2;
+  string msg = 3;
+}
+
+message GetOrderStatisticsRequest{
+
+}
+
+message GetOrderStatisticsResponse{
+  int32 count_id_no_confirm = 1;
+  int32 count_id_no_pay = 2;
+  int32 count_id_no_reputation = 3;
+  int32 count_id_no_transfer = 4;
+  int32 count_id_close = 5;
+}
+
+message ListOrderByIdRequest{
+  int32 page = 1;
+  int32 pageSize = 2;
+  OrderLable status = 3;
+}
+
+message ListOrderByIdResponse{
+  int32 code = 1;
+  OrderData data = 2;
+  string msg = 3;
+}
+
+message GetOrderByIdRequest{
+  string id = 1;
+  string hxNumber = 2;
+  string persongOrderId = 3;
+}
+
+message GetOrderByIdResponse{
+
+}

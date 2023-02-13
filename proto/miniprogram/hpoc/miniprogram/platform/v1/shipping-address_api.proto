@@ -28,6 +28,13 @@ service ShippingAddressAPI {
       response_body: "*"
     };
   }
+  //TODO
+  rpc GetDefaultShippingAddress (GetDefaultShippingAddressRequest) returns (GetDefaultShippingAddressResponse) {
+    option (google.api.http) = {
+      get: "/user/shipping-address/default/v2"
+      response_body: "*"
+    };
+  }
   rpc UpdateShippingAddress (UpdateShippingAddressRequest) returns (UpdateShippingAddressResponse) {
     option (google.api.http) = {
       post: "/user/shipping-address/update"
@@ -65,6 +72,15 @@ message GetShippingAddressRequest {
 }
 
 message GetShippingAddressResponse {
+  int32 code = 1;
+  string msg = 2;
+  hpoc.miniprogram.platform.v1.ShippingAddress data = 3;
+}
+
+message GetDefaultShippingAddressRequest {
+}
+
+message GetDefaultShippingAddressResponse {
   int32 code = 1;
   string msg = 2;
   hpoc.miniprogram.platform.v1.ShippingAddress data = 3;

@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/field_behavior.proto";
+import "hpoc/miniprogram/platform/v1/good.proto";
+import "hpoc/miniprogram/platform/v1/operation.proto";
+import "hpoc/shared/types/meta/v1/metadata.proto";
+
+message Order {
+  int32 amountLogistics = 1;
+  int32 amountReal = 2;
+  int32 goodsNumber = 3;
+
+  // kd isNeedLogistics = true
+  // zt isNeedLogistics = false
+  bool isNeedLogistics =4;
+  int32 score = 5;
+
+  // for calculate
+  int32 amountTotle = 6;
+  repeated string couponId = 7;
+  int32 couponAmount = 8;
+  int32 deductionMoney = 9;
+  int32 deductionScore = 10;
+
+  // for create real order
+  string dateAdd = 11;
+  string dateClose = 12;
+  bool hasRefund = 13;
+  string id = 14;
+  string orderNumber = 15;
+  int32 orderType = 16;
+  int32 refundStatus = 17;
+  string remark = 18;
+  int32 shopId = 19;
+  int32 status = 20;
+
+  // for zt
+  int32 shopIdZt = 21;
+  string shopNameZt = 22;
+}
+
+enum OrderLable {
+  ORDER_LABLE_UNSPECIFIED = 0;
+  ORDER_LABLE_ALL = 1;
+  ORDER_LABLE_PAY = 2;
+  ORDER_LABLE_TRANSFER = 3;
+  ORDER_LABLE_CONFIRM = 4;
+  ORDER_LABLE_REPUTATION = 5;
+}
+
+message OrderData{
+  repeated Good goodsMap = 1;
+  repeated Order orderList = 2;
+  int32 totalPage = 3;
+  int32 totalRow = 4;
+}

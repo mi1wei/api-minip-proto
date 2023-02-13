@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package hpoc.miniprogram.platform.v1;
+
+import "google/api/field_behavior.proto";
+import "hpoc/miniprogram/platform/v1/operation.proto";
+import "hpoc/shared/types/meta/v1/metadata.proto";
+
+message PrePay{
+  string appid = 1;
+  string nonceStr = 2;
+  string outTradeId = 3;
+  string package = 4;
+  string paySign = 5;
+  string prepayId = 6;
+  string sign = 7;
+  string signType = 8;
+  string timeStamp = 9;
+}
+

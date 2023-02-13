@@ -34,6 +34,9 @@ message Good{
   repeated string details = 21;
   int32 shopId = 22;
   GoodLable label = 23;
+  int32 numberGoodReputation = 24;
+  int32 numberOrders = 25;
+
 
   Operation operation = 50[(google.api.field_behavior) = OUTPUT_ONLY];
   hpoc.shared.types.meta.v1.Meta meta = 51 [(google.api.field_behavior) = OUTPUT_ONLY];
