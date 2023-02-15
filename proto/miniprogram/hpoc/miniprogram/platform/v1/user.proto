@@ -23,6 +23,7 @@ message UserBaseInfo{
   int32 status = 7;
   string statusStr =8;
   int32 gender = 9;
+  string mobile = 10;
 }
 
 message UserAmount {
